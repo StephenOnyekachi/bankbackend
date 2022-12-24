@@ -1,0 +1,198 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div>
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <nav class="navbar navbar-fixed-top nav">
+            <input type="checkbox" id="menu-bar">
+            <label for="menu-bar" class="navbar-toggle">
+                <i class="fa fa-navicon" id="bars" width="50px"></i>
+                <i class="fa fa-remove" id="cancel" width="50px"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'about' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbars col-ms-6">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">home</a></li>
+                    <li class="nav-active"><a href="{% url 'about' %}">about</a></li>
+                    <li><a href="{% url 'service' %}">service</a></li>
+                    <li><a href="{% url 'contact' %}">contact</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li><a href="{% url 'login' %}">get started</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner">
+            <div class="col-12 slider">
+                <img src="{% static 'image/img6.png' %}" alt="" class="img-responsive" id="slideImg">
+            </div>
+            <div class="overlay">
+                <div class="overlay1">
+                    <div class="col-md-12 slide1">
+                        <h3>standard bank</h3>
+                        <p>your banking, tailored for you</p>
+                        <h5>we're here for you. and yours</h5>
+                    </div>
+                    <div class="col-md-12 slide2">
+                        <a href="{% url 'signup' %}">GET STARTED</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner2">
+            <div class="banner2-content">
+                <div class="banner2-content-img">
+                    <img src="{% static 'image/img7.jpg' %}" alt="">
+                </div>
+                <h3>we're changing the way people think about banking</h3>
+                <p style="text-align: justify;">
+                    standard bank is a financial technology company founded on the premise that basic banking
+                    services should be helpful. easy and free. we want to profit with our members, not from them. that's why
+                     our model doesn't rely on overdraft. monthly service, minimum balance, or other consumer fees. we partner with regional 
+                    banks to design member first financial products. this creates a more competitive market with better, lower-cost
+                    options for everyday americans who are'n being served well by traditional bank. we 
+                    help drive innovation, inclusion, and access acrose the industry.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="banner6">
+        <div class="banner6-img">
+            <img src="{% static 'image/bitcoin.png' %}" alt="">
+            <div class="banner6-contents">
+                <div>
+                    <h3>our <b>mission</b></h3>
+                </div>
+                <div class="banner6-content">
+                    <p>
+                        standard bank exists becauce we belive everyone deserves financial peace of minde. we'r building a new 
+                        kind of online bank account that helps members get ahead by making managing money easy.
+                        it's your money. it's your life.
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="banner2">
+        <div class="banner2-content">
+            <h3>our culture.</h3>
+            <p style="text-align: justify;">
+                we belives that creating a company where people love to work is built on relationship. growth, and impact,
+                we cultivate a culture of low ego and set a high bar for excellence. we believe in flat organizationa and open
+                work spaces. we treat one another inside the company the same way we treat our members-by communicating in ways that buld trust, 
+                operating with transparency, and having one another's back. we recognize the contributions of individuals and celebrate
+                wins as a team. every member of the team is an owner of the company and is encouraged to take on any part
+                of the business. what we all have in common is a mission that starts with heart, and a desire to work together to create
+                somthing of lasting value and personal impact for our employees and members alike.
+            </p>
+        </div>
+    </div>
+
+    <div class="border4">
+        <div class="banner4-content">
+            <div>
+                <h3>board <b id="b">of directors</b></h3>
+            </div>
+            <div class="banner4-contents">
+                <div class="banner4-items">
+                    <img src="{% static 'image/003.png' %}" alt="">
+                    <p>ryan king</p>
+                    <i class="position">management director.</i>
+                </div>
+                <div class="banner4-items">
+                    <img src="{% static 'image/team2.jpg' %}" alt="">
+                    <p>michael adam</p>
+                    <i class="position">chief executive officer.</i>
+                </div>
+            </div>
+            <div class="banner4-contents">
+                <div class="banner4-items">
+                    <img src="{% static 'image/002.png' %}" alt="">
+                    <p>watson smitht</p>
+                    <i class="position">bank manager.</i>
+                </div>
+                <div class="banner4-items">
+                    <img src="{% static 'image/team4.jpg' %}" alt="">
+                    <p>mariza edisa</p>
+                    <i class="position">director</i>
+                </div>
+            </div>
+            <div class="banner4-contents">
+                <div class="banner4-items">
+                    <img src="{% static 'image/team5.jpg' %}" alt="">
+                    <p>john thomson</p>
+                    <i class="position">director.</i>
+                </div>
+                <div class="banner4-items">
+                    <img src="{% static 'image/melissa_Alvarado.png' %}" alt="">
+                    <p>eliza alvarado</p>
+                    <i class="position">executive officer.</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>
+            <h3>contact info</h3>
+            <i class="fa fa-map-marker"> 2130 fulton street, san diego, CA 94117-1080 USA</i><br>
+            <i class="fa fa-map-marker"> 72 du cane rd, london w12 OHS, united kingdom</i><br>
+            <i class="fa fa-map-marker"> meydan racecourse Al meydan road, nad al sheba - dubai - united arab emirates</i><br>
+            <i class="fa fa-envelope-o"> support@standardbank.com</i>
+        </div>
+
+        <div>
+            <h3>standard bank</h3>
+            <i> about us</i><br>
+            <i> services</i><br>
+            <i> contact us</i><br>
+        </div>
+        <hr>
+        <div>
+            <span>coytrite 2021 save standard bank. all rights seserved</span>
+            <span>privicy policy terms & conditions disclaimer.</span>
+        </div>
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+
+    <link href="{% static 'image/logo.png'%}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css'%}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css'%}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div class="bg">
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <!-- <nav class="navbar navbar-fixed-top nav"> -->
+        <nav>
+            <!-- <input type="checkbox" id="menu-bar"> -->
+            <label for="" class="bar-icons">
+                <i class="fa fa-navicon" id="bars" width="50px" onclick="bars()"></i>
+                <i class="fa fa-remove" id="cancel" width="50px" onclick="cancel()"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'admin_panel' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="board-nav" id="board_nav">
+                <ul>
+                    <li class="fa fa-pie-chart"><a href="{% url 'admin_panel' %}">admin panel</a></li>
+                    <li class="fa fa-power-off"><a href="{% url 'user_login' %}">log out</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="board">
+
+            <div class="banner2-content" id="banner2-content">
+                <div class="banner2-contents">
+                    <div style="margin-top: 70px;" class="welcome">
+                        <h3>hi, 
+                            <b>{{request.user}}</b> <br>
+                            <p>banking like never before.</p>
+                        
+                        </h3>
+                        <br>
+                        
+                    </div>
+    
+                    <div class="contact">
+    
+                        <div class="help">
+                            <label class="dils">trust call:</label><br>
+                        </div>
+
+                        <table class="table table-condensed">
+                            <caption>set trust call</caption>
+                            <thead>
+                                <tr>
+                                    <th>customers</th>
+                                    <th>employees</th>
+                                    <th>deposit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for trustcall in trustcall %}
+                                <tr>
+                                    <div>
+                                        <td>{{trustcall.customers}}</td>
+                                        <td>{{trustcall.employees}}</td>
+                                        <td>{{trustcall.deposit}}</td>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'edit_trustcall' trustcall.id %}">
+                                            <i class="fa fa-edit" style="color:green;border:1px solid green;padding:5px"> edit</i>
+                                        </a>
+                                    </div>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <div class="help">
+                            <label class="dils">users:</label><br>
+                        </div>
+
+                        <table class="table table-condensed">
+                            <caption>all users</caption>
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>User balance</th>
+                                    <th>about user</th>
+                                    <th>Delete user</th>
+                                    <th>Date Joined</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for users in users %}
+                                <tr>
+                                    <td>{{users.name}}</td>
+                                    <td>$ {{users.balance}}.00</td>
+                                    <td><a href="{% url 'edit' users.id %}"><i class="fa fa-edit" style="color:green;"></i></a></td>
+                                    <td><a href="{% url 'delete' users.id %}"><i class="fa fa-trash" style="color:red;"></i></a></td>
+                                    <td>{{users.date_joined}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="banner2-content" id="banner2-content">
+
+                <div class="contact">
+
+                    <div class="help">
+                        <label class="dils">messages:</label><br>
+                    </div>
+
+                    <table class="table table-condensed">
+                        <caption>all messages</caption>
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>message</th>
+                                <th>Delete message</th>
+                                <th>Date sent</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for message in message %}
+                            <tr>
+                                <td>{{message.email}}</td>
+                                <td>{{message.message}}</td>
+                                <td><a href="{% url 'delete_message' message.id %}"><i class="fa fa-trash" style="color:red;"></i></a></td>
+                                <td>{{message.sent_time}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                
+            </div>
+
+            <div class="banner2-content" id="banner2-content">
+
+                <div class="contact">
+
+                    <div class="help">
+                        <label class="dils">loans:</label><br>
+                    </div>
+
+                    <table class="table table-condensed">
+                        <caption>all loan appled</caption>
+                        <thead>
+                            <tr>
+                                <th>User Name</th>
+                                <th>message</th>
+                                <th>amount</th>
+                                <th>date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for loan in loan %}
+                            <tr>
+                                <td>{{loan.to}}</td>
+                                <td>{{loan.message}}</td>
+                                <td>{{loan.amount}}</td>
+                                <td>{{loan.sent_time}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                
+            </div>
+
+            <div class="banner2-content" id="banner2-content">
+
+                <div class="contact">
+
+                    <div class="help">
+                        <label class="dils">transactions:</label><br>
+                    </div>
+
+                    <table class="table table-condensed">
+                        <caption>all loan appled</caption>
+                        <thead>
+                            <tr>
+                                <th>type</th>
+                                <th>amount</th>
+                                <th>to/from</th>
+                                <th>description</th>
+                                <th>date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payment in payment %}
+                            <tr>
+                                <td>{{payment.type}}</td>
+                                <td>{{payment.amount}}</td>
+                                <td>{{payment.to}}</td>
+                                <td>{{payment.message}}</td>
+                                <td>{{payment.sent_time}}</td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>
+

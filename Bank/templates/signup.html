@@ -1,0 +1,113 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div>
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <nav class="navbar navbar-fixed-top nav">
+            <input type="checkbox" id="menu-bar">
+            <label for="menu-bar" class="navbar-toggle">
+                <i class="fa fa-navicon" id="bars" width="50px"></i>
+                <i class="fa fa-remove" id="cancel" width="50px"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'user_signup' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbars col-ms-6">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">home</a></li>
+                    <li><a href="{% url 'about' %}">about</a></li>
+                    <li><a href="{% url 'service' %}">service</a></li>
+                    <li><a href="{% url 'contact' %}">contact</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li class="nav-active"><a href="{% url 'user_login' %}">get started</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner2">
+            <div class="banner2-content">
+                <div style="margin-top: 70px;">
+                    <h3>signup <b>here</b></h3>
+                </div>
+
+                {% for message in messages %}
+                <div class="caption alert alert-success">
+                    <p id="messages"> {{message}} </p>
+                </div>
+                {% endfor %}
+
+                <div class="contact">
+                    <form action="" method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="help">
+                            <label for="">name</label><br>
+                            <input type="text" placeholder="enter your full name" name="username" required>
+                        </div>
+
+                        <div class="help">
+                            <label for="">email</label><br>
+                            <input type="email" placeholder="enter your valid email" name="email" required>
+                        </div>
+
+                        <div class="help">
+                            <label for="">password</label><br>
+                            <input type="password" placeholder="create password" name="password1" required>
+                        </div>
+
+                        <div class="help">
+                            <label for="">confirm password</label><br>
+                            <input type="password" placeholder="confirm your new password" name="password2" required>
+                        </div>
+
+                        <div class="help">
+                            <a href="{% url 'user_login' %}">i have an account</a>
+                        </div>
+                        <div class="help">
+                            <button>Next</button>
+                        </div>
+                    </form>
+                    <h3><b>our online banking</b></h3>
+                    <h3>more than just a bank</h3>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>

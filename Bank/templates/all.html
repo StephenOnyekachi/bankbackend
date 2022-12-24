@@ -1,0 +1,167 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div class="bg">
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <!-- <nav class="navbar navbar-fixed-top nav"> -->
+        <nav>
+            <!-- <input type="checkbox" id="menu-bar"> -->
+            <label for="" class="bar-icons">
+                <i class="fa fa-navicon" id="bars" width="50px" onclick="bars()"></i>
+                <i class="fa fa-remove" id="cancel" width="50px" onclick="cancel()"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'all' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="board-nav" id="board_nav">
+                <ul>
+                    <li class="fa fa-pie-chart"><a href="{% url 'dashboard' %}">dashboard</a></li>
+                    <li class="fa fa-user-o"><a href="{% url 'profile' %}">my profile</a></li>
+                    <li class="fa fa-share-square-o"><a href="{% url 'change' %}">change password</a></li>
+
+                    <li class="fa fa-file-text-o"><a href="{% url 'all' %}">my statement</a></li>
+                    <li class="fa fa-file-text-o"><a href="{% url 'all' %}">domestic transfer</a></li>
+                    <li class="fa fa-angle-double-right"><a href="{% url 'all' %}">inter bank transfer</a></li>
+                    <li class="fa fa-angle-double-right"><a href="{% url 'all' %}">wired transfer</a></li>
+
+                    <li class="fa fa-briefcase"><a href="{% url 'loan' %}">apply for loan</a></li>
+                    <li class="fa fa-envelope-o"><a href="{% url 'message' %}">messages</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li class="fa fa-power-off"><a href="{% url 'user_login' %}">log out</a></li>
+                </ul>
+            </div>
+
+        </nav>
+
+        <div class="board">
+
+            <div class="banner2-content" id="banner2-content">
+                <div class="banner2-contents">
+                    <div style="margin-top: 70px;" class="welcome">
+                        <h3>hi, 
+                            <b>{{request.user}}</b> <br>
+                            <p>banking like never before.</p>
+                        
+                        </h3>
+                        <br>
+                        
+                    </div>
+    
+                    <div class="contact">
+    
+                        <div class="help">
+                            <label class="dils">hits:</label><br>
+                            <label class="dil">
+                                <p>change your interment banking password frequently to keep your account safe</p>
+                            </label>
+
+                            <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>withdraw/transfer/wired</th>
+                                    <th>amount</th>
+                                    <th>to/from</th>
+                                    <th>description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <div>
+                                            <td><input type="text" name="type"></td>
+                                            <td><input type="number" name="amount"></td>
+                                            <td><input type="text" name="to"></td>
+                                            <td><input type="text" name="message"></td>
+                                            <br>
+                                        </div>
+                                        <div>
+                                            <button>submit</button>
+                                        </div>
+                                    </form>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+
+            <div class="banner2-content" id="banner2-content">
+
+                <div class="contact">
+
+                    <div class="help">
+                        <label class="dils">your financial statement review:</label><br>
+                        <hr>
+                        <label class="dils">your financial statement:</label><br>
+                        <hr>
+
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>type</th>
+                                    <th>amount</th>
+                                    <th>to/from</th>
+                                    <th>description</th>
+                                    <th>date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for payment in payment %}
+                                <tr>
+                                    <td>{{payment.type}}</td>
+                                    <td>{{payment.amount}}</td>
+                                    <td>{{payment.to}}</td>
+                                    <td>{{payment.message}}</td>
+                                    <td>{{payment.date}}</td>
+                                    <td></td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>

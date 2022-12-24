@@ -1,0 +1,168 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>services</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div>
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <nav class="navbar navbar-fixed-top nav">
+            <input type="checkbox" id="menu-bar">
+            <label for="menu-bar" class="navbar-toggle">
+                <i class="fa fa-navicon" id="bars" width="50px"></i>
+                <i class="fa fa-remove" id="cancel" width="50px"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'service' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbars col-ms-6">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">home</a></li>
+                    <li><a href="{% url 'about' %}">about</a></li>
+                    <li class="nav-active"><a href="{% url 'service' %}">service</a></li>
+                    <li><a href="{% url 'contact' %}">contact</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li><a href="{% url 'login' %}">get started</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner">
+            <div class="col-12 slider">
+                <img src="{% static 'image/img6.png' %}" alt="" class="img-responsive" id="slideImg">
+            </div>
+            <div class="overlay">
+                <div class="overlay1">
+                    <div class="col-md-12 slide1">
+                        <h3>standard bank</h3>
+                        <p>your banking, tailored for you</p>
+                        <h5>we're here for you. and yours</h5>
+                    </div>
+                    <div class="col-md-12 slide2">
+                        <a href="{% url 'signup' %}">GET STARTED</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner2">
+            <div class="banner2-content">
+                <div>
+                    <h3>services <b>we provide</b></h3>
+                </div>
+                <div class="service">
+                    <h3>
+                        <p>mbile friendly banking app</p>
+                        <i class="fa fa-mobile"></i>
+                    </h3>
+                    <h3>
+                        <p>personal profile</p>
+                        <i class="fa fa-list-alt"></i>
+                    </h3>
+                    <h3>
+                        <p>cheque transfer</p>
+                        <i class="fa fa-file-text-o"></i>
+                    </h3>
+                </div>
+                <div class="banner2-content-img">
+                    <img src="{% static 'image/img7.jpg' %}" alt="">
+                </div>
+                <div class="service">
+                    <h3>
+                        <p>credit, debit cards</p>
+                        <i class="fa fa-credit-card"></i>
+                    </h3>
+                    <h3>
+                        <p>servings account</p>
+                        <i class="fa fa-dropbox"></i>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="border4">
+        <div class="banner4-content">
+            <div>
+                <h3>products <b id="b">to meet your life goals</b></h3>
+            </div>
+            <div class="banner4-contents">
+                <div class="banner4-item">
+                    <i class="fa fa-pie-chart icon"></i>
+                    <p>personal loan</p>
+                    <i class="fa fa-long-arrow-right icon2"></i>
+                </div>
+                <div class="banner4-item">
+                    <i class="fa fa-ioxhost icon"></i>
+                    <p>fixed deposit</p>
+                    <i class="fa fa-long-arrow-right icon2"></i>
+                </div>
+            </div>
+            <div class="banner4-contents">
+                <div class="banner4-item">
+                    <i class="fa fa-line-chart icon"></i>
+                    <p>savinga acoount</p>
+                    <i class="fa fa-long-arrow-right icon2"></i>
+                </div>
+                <div class="banner4-item">
+                    <i class="fa fa-credit-card icon"></i>
+                    <p>credit cards</p>
+                    <i class="fa fa-long-arrow-right icon2"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div>
+            <h3>contact info</h3>
+            <i class="fa fa-map-marker"> 2130 fulton street, san diego, CA 94117-1080 USA</i><br>
+            <i class="fa fa-map-marker"> 72 du cane rd, london w12 OHS, united kingdom</i><br>
+            <i class="fa fa-map-marker"> meydan racecourse Al meydan road, nad al sheba - dubai - united arab emirates</i><br>
+            <i class="fa fa-envelope-o"> support@standardbank.com</i>
+        </div>
+
+        <div>
+            <h3>standard bank</h3>
+            <i> about us</i><br>
+            <i> services</i><br>
+            <i> contact us</i><br>
+        </div>
+        <hr>
+        <div>
+            <span>© rite 2021 save standard bank. all rights served</span>
+            <span>privacy policy terms & conditions disclaimer.</span>
+        </div>
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>

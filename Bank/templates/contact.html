@@ -1,0 +1,132 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div>
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <nav class="navbar navbar-fixed-top nav">
+            <input type="checkbox" id="menu-bar">
+            <label for="menu-bar" class="navbar-toggle">
+                <i class="fa fa-navicon" id="bars" width="50px"></i>
+                <i class="fa fa-remove" id="cancel" width="50px"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'contact' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbars col-ms-6">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">home</a></li>
+                    <li><a href="{% url 'about' %}">about</a></li>
+                    <li><a href="{% url 'service' %}">service</a></li>
+                    <li class="nav-active"><a href="{% url 'contact' %}ml">contact</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li><a href="{% url 'login' %}">get started</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner2">
+            <div class="banner2-content">
+                <div style="margin-top: 70px;">
+                    <h3>ge in <b>touch with us</b></h3>
+                </div>
+                <div class="contact">
+                    <h3>contact info</h3>
+                    <i class="fa fa-map-marker"> 2130 fulton street, san diego, CA 94117-1080 USA</i><br>
+                    <i class="fa fa-map-marker"> 72 du cane rd, london w12 OHS, united kingdom</i><br>
+                    <i class="fa fa-map-marker"> meydan racecourse Al meydan road, nad al sheba - dubai - united arab emirates</i><br>
+                    <i class="fa fa-envelope-o"> support@standardbank.com</i>
+                </div>
+
+                <div class="contact">
+                    <h3>follow us</h3>
+                    <i class="fa fa-facebook-square"> fa-facebook</i><br>
+                    <i class="fa fa-twitter-square"> twitter</i><br>
+                    <i class="fa fa-google-plus-square"> google</i><br>
+                    <i class="fa fa-youtube-square"> youTube</i>
+                </div>
+
+                <div class="contact">
+                    <h3>contact us</h3>
+                    <form action="{% url 'contact' %}" method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="help">
+                            <label for="">name</label><br>
+                            <input type="text" placeholder="enter name" name="name" required>
+                        </div>
+                        <div class="help">
+                            <label for="">email</label><br>
+                            <input type="email" placeholder="enter email" name="email" required>
+                        </div>
+                        <div class="help">
+                            <label for="">how can we help you?</label><br>
+                            <textarea name="text" id="" cols="50" rows="5" required>enter your message here</textarea>
+                        </div>
+                        <div class="help">
+                            <button>Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div>
+            <h3>contact info</h3>
+            <i class="fa fa-map-marker"> 2130 fulton street, san diego, CA 94117-1080 USA</i><br>
+            <i class="fa fa-map-marker"> 72 du cane rd, london w12 OHS, united kingdom</i><br>
+            <i class="fa fa-map-marker"> meydan racecourse Al meydan road, nad al sheba - dubai - united arab emirates</i><br>
+            <i class="fa fa-envelope-o"> support@standardbank.com</i>
+        </div>
+
+        <div>
+            <h3>standard bank</h3>
+            <i> about us</i><br>
+            <i> services</i><br>
+            <i> contact us</i><br>
+        </div>
+        <hr>
+        <div>
+            <span>coytrite 2021 save standard bank. all rights seserved</span>
+            <span>privicy policy terms & conditions disclaimer.</span>
+        </div>
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>

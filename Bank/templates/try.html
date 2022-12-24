@@ -1,0 +1,149 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div class="bg">
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <!-- <nav class="navbar navbar-fixed-top nav"> -->
+        <nav>
+            <!-- <input type="checkbox" id="menu-bar"> -->
+            <label for="" class="bar-icons">
+                <i class="fa fa-navicon" id="bars" width="50px" onclick="bars()"></i>
+                <i class="fa fa-remove" id="cancel" width="50px" onclick="cancel()"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'profile' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="board-nav" id="board_nav">
+                <ul>
+                    <li class="fa fa-pie-chart"><a href="{% url 'dashboard' %}">dashboard</a></li>
+                    <li class="nav-active fa fa-user-o"><a href="{% url 'profile' %}">my profile</a></li>
+                    <li class="fa fa-share-square-o"><a href="{% url 'change' %}">change password</a></li>
+
+                    <li class="fa fa-file-text-o"><a href="{% url 'all' %}">my statement</a></li>
+                    <li class="fa fa-file-text-o"><a href="{% url 'all' %}">domestic transfer</a></li>
+                    <li class="fa fa-angle-double-right"><a href="{% url 'all' %}">inter bank transfer</a></li>
+                    <li class="fa fa-angle-double-right"><a href="{% url 'all' %}">wired transfer</a></li>
+
+                    <li class="fa fa-briefcase"><a href="{% url 'loan' %}">apply for loan</a></li>
+                    <li class="fa fa-envelope-o"><a href="{% url 'message' %}">messages</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li class="fa fa-power-off"><a href="{% url 'user_logout' %}">log out</a></li>
+                </ul>
+            </div>
+
+        </nav>
+
+        <div class="board">
+            <div class="banner2-content" id="banner2-content">
+
+                <div class="contact">
+                    
+                    <div>
+                        {% if user.image %}
+                        <img src="{{user.image.url}}" alt="">
+                        {% else %}
+                        <img src="{% static 'image/user.png' %}" style="color:green; font-size:10rem; color: white;">
+                        {% endif %}
+                        <form method="POST" name="form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label class="dils" for="img" style="border:1px solid white;border-radius:5px;padding:5px;cursor:pointer">
+                                upload profile picture here</label><br>
+                            <input type="file" id="img" name="image" style="display:none">
+                            <button style="background-color: green; color:white;padding:5px;">Save</button>
+                        </form>
+                        <div class="help">
+                            <label class="dils">{{request.user}}</label><br>
+                            <label class="dils">{{user.account_number}}</label>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="help">
+                        <label class="dils">email</label><br>
+                        <label class="dil">
+                            <p>{{request.user.email}}</p>
+                        </label>
+                    </div>
+
+                    <div class="help">
+                        <label class="dils">account type:</label><br>
+                        <label class="dil">savings(USD $)</label>
+                    </div>
+
+                    <div class="help">
+                        <label class="dils">account balance:</label><br>
+                        <label class="dil">USD $ {{user.balance}}</label>
+                    </div>
+
+                    <div class="help">
+                        <label class="dils">profile overview</label><br>
+                        <label for="">below is your online banking profile details</label>
+                    </div>
+
+                    <hr>
+                    {% for user in user %}
+                    <div class="help">
+                        <div>
+                            <li>phone</li>
+                            <span>{{user.name}}</span>
+                        </div>
+
+                        <div>
+                            <li>sex</li>
+                            <span>{{user.email}}</span>
+                        </div>
+
+                        <div>
+                            <li>marital status</li>
+                            <span>{{user.message}}</span>
+                        </div>
+
+                        <div>
+                            <li>date of birth</li>
+                            <span>{{user.sent_time}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>

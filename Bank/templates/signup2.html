@@ -1,0 +1,120 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div>
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+        <nav class="navbar navbar-fixed-top nav">
+            <input type="checkbox" id="menu-bar">
+            <label for="menu-bar" class="navbar-toggle">
+                <i class="fa fa-navicon" id="bars" width="50px"></i>
+                <i class="fa fa-remove" id="cancel" width="50px"></i>
+            </label>
+
+            <div class="navbar-brand logo col-sm-4">
+                <a href="{% url 'signup2' %}">
+                    <div class="logoimg">
+                        <img src="{% static 'image/logo.png' %}">
+                        <span>standard bank</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse navbars col-ms-6">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">home</a></li>
+                    <li><a href="{% url 'about' %}">about</a></li>
+                    <li><a href="{% url 'service' %}">service</a></li>
+                    <li><a href="{% url 'contact' %}">contact</a></li>
+                    <li id="google_translate_element" class="trans"><a>translate</a></li>
+                    <li class="nav-active"><a href="{% url 'user_login' %}">get started</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="banner2">
+            <div class="banner2-content">
+                <div style="margin-top: 70px;">
+                </div>
+
+                {% for message in messages %}
+                <div class="caption alert alert-success">
+                    <p id="messages"> {{message}} </p>
+                </div>
+                {% endfor %}
+
+                <div class="contact">
+                    <form action="" method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="help">
+                            <label for="">phone number</label><br>
+                            <input type="number" placeholder="enter your phone number" name="phone" required>
+                        </div>
+
+                        <div class="help">
+                            <label for="">gender</label><br>
+                            <input type="text" placeholder="enter your gender" name="gender" required>
+
+                            eg: <br>
+                            male or female
+                        </div>
+
+                        <div class="help">
+                            <label for="">marital status</label><br>
+                            <input type="text" placeholder="enter your marital status" name="status" required>
+
+                            eg: <br>
+                            maried, devioce, sigle, widow, dating etc
+                        </div>
+
+                        <div class="help">
+                            <label for="">date of birth</label><br>
+                            <input type="date" placeholder="enter your date of birth" name="date" required>
+                        </div>
+
+                        <div class="help">
+                            <label for="">address</label><br>
+                            <input type="text" placeholder="enter your address" name="address" required>
+                        </div>
+
+                        <div class="help">
+                            <button>create</button>
+                        </div>
+                    </form>
+                    <h3><b>our online banking</b></h3>
+                    <h3>more than just a bank</h3>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>
