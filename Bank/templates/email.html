@@ -1,0 +1,64 @@
+
+{% load static %}
+{% static "medians" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>email</title>
+
+    <link href="{% static 'image/logo.png' %}" rel="icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/media.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+</head>
+<body onload="slider()">
+    <div class="bg">
+        <div id="preloader">
+            <div class="fa fa-spinner fa-3x fa-spin" id="preloader-icon"></div>
+        </div>
+
+
+        <div class="board">
+            <div class="banner2-content" id="banner2-content">
+                <div style="margin-top: 70px;" class="welcome">
+                    <h3>
+                        <p>banking like never before.</p>
+                        <img src="{% static 'image/user1.png' %}">
+                    </h3>
+                    <br>
+                    <p>
+                        <b>{{user.name}}</b> welcome to standard online banking, a place like no other.<br>
+                        your account number is <b>{{user.account_number}}</b>. your account number is your power.
+
+                        <br><br>
+                        our website <a href="{% url 'index' %}">click to go our website</a><br>
+                        login <a href="{% url 'user_login' %}"> from here... </a>
+
+                    </p>
+                </div>
+
+                <div class="contact">
+
+                    <h3><b>our online banking</b></h3>
+                    <h3>more than just a bank</h3>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{% static 'css/js.js' %}"></script>
+</body>
+</html>
+

@@ -21,6 +21,51 @@
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
+    <style>
+        #img{
+            width: 100%;
+            height: 100vh;
+            animation: zoom 10s linear infinite
+        }
+        .col1{
+            color: white;
+            animation: zooms 15s linear infinite
+        }
+        @keyframes zooms{
+            0%{
+                background-color: green;
+            }
+            10%{
+                background-color: none;
+            }
+            65%{
+                background-color: green;
+            }
+            100%{
+                background-color: red;
+            }
+        }
+
+        .col2{
+            color: white;
+            animation: zoomss 15s linear infinite
+        }
+        @keyframes zoomss{
+            0%{
+                background-color: yellowgreen;
+            }
+            15%{
+                background-color: greenyellow;
+            }
+            85%{
+                background-color: none;
+            }
+            100%{
+                background-color: yellow;
+            }
+        }
+    </style>
+
 </head>
 <body onload="slider()">
     <div>
@@ -43,6 +88,7 @@
                     </div>
                 </a>
             </div>
+            <div id="google_translate_element" style="position:relative;left:180px;top:20px"></div>
 
             <div class="collapse navbar-collapse navbars col-ms-6">
                 <ul class="nav navbar-nav">
@@ -50,7 +96,6 @@
                     <li><a href="{% url 'about' %}">about</a></li>
                     <li><a href="{% url 'service' %}">service</a></li>
                     <li><a href="{% url 'contact' %}">contact</a></li>
-                    <li id="google_translate_element" class="trans"><a>translate</a></li>
                     <li><a href="{% url 'user_login' %}">get started</a></li>
                 </ul>
             </div> 
@@ -59,7 +104,7 @@
 
         <div class="banner">
             <div class="col-12 slider">
-                <img src="{% static 'image/img6.png' %}" alt="" class="img-responsive" id="slideImg">
+                <img src="{% static 'image/img6.png' %}" alt="" class="img-responsive" id="img">
             </div>
             <div class="overlay">
                 <div class="overlay1">
@@ -128,48 +173,48 @@
                     <tr>
                         <td>EUR</td>
                         <td></td>
-                        <td>1.60001</td>
+                        <td class="col1">1.60001</td>
                         <td>110.275</td>
                     </tr>
                     <tr>
                         <td>USD</td>
                         <td>0.9492</td>
                         <td></td>
-                        <td>411.027</td>
+                        <td class="col2">411.027</td>
                     </tr>
                     <tr>
                         <td>JPY</td>
                         <td>0.0069770</td>
-                        <td>0.007347</td>
+                        <td class="col1">0.007347</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td>GBP</td>
-                        <td>1.1590</td>
+                        <td class="col1">1.1590</td>
                         <td>1.2210</td>
-                        <td>166.165</td>
+                        <td class="col2">166.165</td>
                     </tr>
                     <tr>
                         <td>CHF</td>
                         <td>1.0101</td>
                         <td>1.0643</td>
-                        <td>144.852</td>
+                        <td class="col2">144.852</td>
                     </tr>
                     <tr>
                         <td>AUD</td>
-                        <td>0.6405</td>
+                        <td class="col1">0.6405</td>
                         <td>0.67492</td>
                         <td>91.849</td>
                     </tr>
                     <tr>
                         <td>CAD</td>
                         <td>0.7031</td>
-                        <td>0.7402</td>
+                        <td class="col2">0.7402</td>
                         <td>100.719</td>
                     </tr>
                     <tr>
                         <td>NZD</td>
-                        <td>0.6013</td>
+                        <td class="col1">0.6013</td>
                         <td>0.63363</td>
                         <td>86.231</td>
                     </tr>
@@ -177,7 +222,7 @@
                         <td>CNY</td>
                         <td>0.13642</td>
                         <td>0.1436</td>
-                        <td>19.540</td>
+                        <td class="col2">19.540</td>
                     </tr>
                 </tbody>
             </table>

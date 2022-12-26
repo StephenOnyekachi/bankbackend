@@ -20,6 +20,14 @@
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
+    <style>
+        #img{
+            width: 100%;
+            height: 100vh;
+            animation: zoom 3s linear infinite
+        }
+    </style>
+
 </head>
 <body onload="slider()">
     <div>
@@ -42,6 +50,7 @@
                     </div>
                 </a>
             </div>
+            <div id="google_translate_element" style="position:relative;left:180px;top:20px"></div>
 
             <div class="collapse navbar-collapse navbars col-ms-6">
                 <ul class="nav navbar-nav">
@@ -49,15 +58,14 @@
                     <li><a href="{% url 'about' %}">about</a></li>
                     <li class="nav-active"><a href="{% url 'service' %}">service</a></li>
                     <li><a href="{% url 'contact' %}">contact</a></li>
-                    <li id="google_translate_element" class="trans"><a>translate</a></li>
-                    <li><a href="{% url 'login' %}">get started</a></li>
+                    <li><a href="{% url 'user_login' %}">get started</a></li>
                 </ul>
             </div>
         </nav>
 
         <div class="banner">
             <div class="col-12 slider">
-                <img src="{% static 'image/img6.png' %}" alt="" class="img-responsive" id="slideImg">
+                <img src="{% static 'image/img6.png' %}" alt="" class="img-responsive" id="img">
             </div>
             <div class="overlay">
                 <div class="overlay1">
@@ -67,7 +75,7 @@
                         <h5>we're here for you. and yours</h5>
                     </div>
                     <div class="col-md-12 slide2">
-                        <a href="{% url 'signup' %}">GET STARTED</a>
+                        <a href="{% url 'user_signup' %}">GET STARTED</a>
                     </div>
                 </div>
             </div>

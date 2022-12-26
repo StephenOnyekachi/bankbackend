@@ -167,6 +167,43 @@
                 
             </div>
 
+
+            <div class="banner2-content" id="banner2-content">
+
+                <div class="contact">
+
+                    <div class="help">
+                        <label class="dils">messages from non register users:</label><br>
+                    </div>
+
+                    <table class="table table-condensed">
+                        <caption>all messages</caption>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>message</th>
+                                <th>Delete message</th>
+                                <th>Date sent</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for contact in contact %}
+                            <tr>
+                                <td>{{contact.name}}</td>
+                                <td>{{contact.email}}</td>
+                                <td>{{contact.message}}</td>
+                                <td><a href="{% url 'delete_message' message.id %}"><i class="fa fa-trash" style="color:red;"></i></a></td>
+                                <td>{{message.sent_time}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
             <div class="banner2-content" id="banner2-content">
 
                 <div class="contact">

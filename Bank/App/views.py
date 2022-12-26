@@ -7,12 +7,17 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import random
 
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+
 from .models import TrustCall
 from .models import Users
 from .models import Message
 from .models import Loan
 from .models import Payment
 from .models import Staff
+from .models import Contact
 
 # Create your views here.
 
@@ -35,6 +40,23 @@ def service(request):
     return render(request, 'service.html')
 
 def contact(request):
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        message = request.POST['message']
+        name = request.POST['text']
+
+        contact = Contact.objects.create(email=email, message=message, name=name)
+        messages.success(request, 'message was sent successfully')
+        contact.save()
+
+        return redirect('message')
+    else:
+        Message()
+
+    context = {
+
+    }
     return render(request, 'contact.html')
 
 def user_login(request):
@@ -74,7 +96,18 @@ def user_signup(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password1)
                 messages.success(request, 'process was successfully, login for the next process')
+                # my_dict = {'username': username}
                 user.save()
+
+                # html_template = 'email.html'
+                # html_message = render_to_string(html_template, context=my_dict)
+                # subject = "welcome to standard bank"
+                # email_from = settings.EMAIL_HOST_USER
+                # recipient_list = [email]
+                # message = EmailMessage(subject, html_message, email_from, recipient_list)
+                # message.content_subtype = 'html'
+                # message.send()
+
                 return redirect('signup_login')
         else:
             messages.info(request, 'password not matching...')
@@ -105,6 +138,7 @@ def signup_login(request):
 
     return render(request, 'login.html')
 
+@login_required(login_url='user_login')
 def signup2(request):
 
     user = Users.objects.get(name=request.user)
@@ -136,15 +170,20 @@ def signup2(request):
         user.address = address
         user.account_number = account_number
         user.save()
+
         return redirect('dashboard')
 
-    context = {}
+    context = {
 
-    return render(request, 'signup2.html')
+    }
+
+    return render(request, 'signup2.html', context)
 
 # for dashboards.
+@login_required(login_url='user_login')
 def admin_panel(request):
 
+    contact = Contact.objects.all().order_by('-id')
     users = Users.objects.all().order_by('-id')
     message = Message.objects.all().order_by('-id')
     loan = Loan.objects.all().order_by('-id')
@@ -158,19 +197,21 @@ def admin_panel(request):
         'loan': loan,
         'trustcall': trustcall,
         'payment': payment,
+        'contact': contact,
     }
     return render(request, 'admin-panel.html', context)
 
+@login_required(login_url='user_login')
 def all(request):
 
-    payment = Payment.objects.all().order_by('id')
+    payment = Payment.objects.filter(name=request.user).order_by('id')
     if request.method == 'POST':
         amount = request.POST['amount']
         to = request.POST['to']
         type = request.POST['type']
         message = request.POST['message']
 
-        payment = Payment.objects.create(amount=amount, message=message, to=to, type=type)
+        payment = Payment.objects.create(amount=amount, message=message, to=to, type=type, name=request.user)
         messages.success(request, 'message was sent successfully')
         payment.save()
 
@@ -184,12 +225,19 @@ def all(request):
 
     return render(request, 'all.html', context)
 
-def change(request):
-    return render(request, 'change.html')
 
+
+# def change(request):
+#     return render(request, 'email.html')
+
+
+
+@login_required(login_url='user_login')
 def dashboard(request):
 
     user = Users.objects.get(name=request.user)
+
+    # payment = Payment.objects.filter(name=request.user).order_by('-id')
     payment = Payment.objects.all().order_by('-id')
 
     context = {
@@ -199,17 +247,18 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
+@login_required(login_url='user_login')
 def loan(request):
 
     # loan = Loan.objects.all().order_by('-id')
-    loan = Loan.objects.get(name=request.loan).order_by('-id')
+    loan = Loan.objects.filter(name=request.user).order_by('-id')
 
     if request.method == 'POST':
         amount = request.POST['amount']
         to = request.POST['to']
         message = request.POST['message']
 
-        loan = Loan.objects.create(amount=amount, message=message, to=to)
+        loan = Loan.objects.create(amount=amount, message=message, to=to, name=request.user)
         messages.success(request, 'message was sent successfully')
         loan.save()
 
@@ -222,9 +271,10 @@ def loan(request):
     }
     return render(request, 'loan.html', context)
 
+@login_required(login_url='user_login')
 def message(request):
 
-    inbox_message = Message.objects.filter(name=request.message).order_by('-id')
+    inbox_message = Message.objects.filter(name=request.user).order_by('-id')
     # message = Message.objects.all()
 
 
@@ -232,7 +282,7 @@ def message(request):
         email = request.POST['email']
         message = request.POST['message']
 
-        user_message = Message.objects.create(email=email, message=message)
+        user_message = Message.objects.create(email=email, message=message, name=request.user)
         messages.success(request, 'message was sent successfully')
         user_message.save()
 
@@ -246,6 +296,7 @@ def message(request):
 
     return render(request, 'message.html', context)
 
+@login_required(login_url='user_login')
 def profile(request):
     user = Users.objects.get(name=request.user)
 
@@ -268,6 +319,7 @@ def user_logout(request):
     logout(request)
     return redirect('user_login')
 
+@login_required(login_url='user_login')
 def edit(request, pk):
     user = Users.objects.get(id=pk)
     if request.method == 'POST':
@@ -282,7 +334,7 @@ def edit(request, pk):
     }
     return render(request, 'edit.html', context)
 
-
+@login_required(login_url='user_login')
 def edit_trustcall(request, pk):
     trustcall = TrustCall.objects.get(id=pk)
     if request.method == 'POST':
@@ -301,7 +353,7 @@ def edit_trustcall(request, pk):
     }
     return render(request, 'edit_trustcall.html', context)
 
-
+@login_required(login_url='user_login')
 def delete(request, pk):
     user = Users.objects.get(id=pk)
     if request.method == 'POST':
@@ -312,6 +364,7 @@ def delete(request, pk):
     }
     return render(request, 'delete.html', context)
 
+@login_required(login_url='user_login')
 def delete_message(request, pk):
     message = Message.objects.get(id=pk)
     if request.method == 'POST':
@@ -324,17 +377,7 @@ def delete_message(request, pk):
 
 
 
-def trying(request):
 
-    # user = Users.objects.get(name=request.user)
-    user = request.user
-    user = Message.objects.create(name=user)
-
-    context = {
-        'user': user,
-    }
-
-    return render(request, 'try.html', context)
 
 
 

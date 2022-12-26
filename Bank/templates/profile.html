@@ -43,12 +43,13 @@
                     </div>
                 </a>
             </div>
+            <div id="google_translate_element" style="position:relative;left:180px;top:20px"></div>
 
             <div class="board-nav" id="board_nav">
                 <ul>
                     <li class="fa fa-pie-chart"><a href="{% url 'dashboard' %}">dashboard</a></li>
                     <li class="nav-active fa fa-user-o"><a href="{% url 'profile' %}">my profile</a></li>
-                    <li class="fa fa-share-square-o"><a href="{% url 'change' %}">change password</a></li>
+                    <li class="fa fa-share-square-o"><a href="{% url 'reset_password' %}">change password</a></li>
 
                     <li class="fa fa-file-text-o"><a href="{% url 'all' %}">my statement</a></li>
                     <li class="fa fa-file-text-o"><a href="{% url 'all' %}">domestic transfer</a></li>
@@ -57,7 +58,6 @@
 
                     <li class="fa fa-briefcase"><a href="{% url 'loan' %}">apply for loan</a></li>
                     <li class="fa fa-envelope-o"><a href="{% url 'message' %}">messages</a></li>
-                    <li id="google_translate_element" class="trans"><a>translate</a></li>
                     <li class="fa fa-power-off"><a href="{% url 'user_logout' %}">log out</a></li>
                 </ul>
             </div>

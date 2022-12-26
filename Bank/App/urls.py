@@ -16,13 +16,11 @@ urlpatterns = [
 
     path('all/', views.all, name='all'),
     path('admin_panel/', views.admin_panel, name='admin_panel'),
-    path('change/', views.change, name='change'),
+    # path('change/', views.change, name='change'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('loan/', views.loan, name='loan'),
     path('message/', views.message, name='message'),
     path('profile/', views.profile, name='profile'),
-
-    path('trying/', views.trying, name='trying'),
 
 
     path('edit/<int:pk>/', views.edit, name='edit'),
@@ -33,5 +31,14 @@ urlpatterns = [
     path('about/', views.index, name='about'),
     path('about/', views.index, name='about'),
     path('about/', views.index, name='about'),
+
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='password_reset.html'),
+         name='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_sent.html'),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_form.html'),
+         name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_done.html'),
+         name='password_reset_complete'),
 ]
 

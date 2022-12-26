@@ -45,23 +45,17 @@ class Message(models.Model):
     def __str__(self):
         return self.email
 
-def save_user_message(sender, instance, created, **kwargs):
-    if created:
-        Message.objects.create(name=instance)
 
 class Contact(models.Model):
-    name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     message = models.TextField()
     email = models.EmailField()
     sent_time = models.DateTimeField(verbose_name="last login", auto_now=True)
-    name = models.CharField(max_length=1000)
+    name = models.CharField(max_length= 1000)
 
     def __str__(self):
         return self.email
 
-def save_user_contact(sender, instance, created, **kwargs):
-    if created:
-        Contact.objects.create(name=instance)
 
 class Loan(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -73,9 +67,6 @@ class Loan(models.Model):
     def __str__(self):
         return self.amount
 
-def save_user_loan(sender, instance, created, **kwargs):
-    if created:
-        Loan.objects.create(name=instance)
 
 class Payment(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -86,11 +77,8 @@ class Payment(models.Model):
     sent_time = models.DateTimeField(verbose_name="last login", auto_now=True)
 
     def __str__(self):
-        return self.amount
+        return str (self.amount)
 
-def save_user_payment(sender, instance, created, **kwargs):
-    if created:
-        Payment.objects.create(name=instance)
 
 class Staff(models.Model):
     image = models.ImageField(null=False)
@@ -100,6 +88,3 @@ class Staff(models.Model):
     def __str__(self):
         return self.name
 
-def save_user_staff(sender, instance, created, **kwargs):
-    if created:
-        Staff.objects.create(name=instance)
