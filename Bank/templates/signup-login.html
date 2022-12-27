@@ -42,7 +42,7 @@
                     </div>
                 </a>
             </div>
-            <div id="google_translate_element" style="position:relative;left:180px;top:20px"></div>
+            <div id="google_translate_element" style="position:absolute;left:30px;top:60px;border:2px solid greenyellow;height:30px"></div>
 
             <div class="collapse navbar-collapse navbars col-ms-6">
                 <ul class="nav navbar-nav">
@@ -79,6 +79,9 @@
                         <div class="help">
                             <label for="">password</label><br>
                             <input type="password" placeholder="enter password" name="password">
+                        </div>
+                        <div class="help">
+                            <a href="{% url 'reset_password' %}">forgotten password</a>
                         </div>
                         <div class="help">
                             <button>next</button>

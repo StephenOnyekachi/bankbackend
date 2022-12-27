@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 import random
 
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from django.conf import settings
 
 from .models import TrustCall
@@ -169,7 +169,17 @@ def signup2(request):
         user.status = status
         user.address = address
         user.account_number = account_number
+        my_dict = {'user': user}
         user.save()
+
+        html_template = 'email.html'
+        html_message = render_to_string(html_template, context=my_dict)
+        subject = "welcome to standard bank"
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [request.user.email]
+        sent_message = send_mail(subject, html_message, email_from, recipient_list)
+        sent_message.content_subtype = 'html'
+        sent_message.send()
 
         return redirect('dashboard')
 
